@@ -1,0 +1,134 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-4">
+			<h5>CLIENTES:</h5>
+			<hr>
+			<div class="card card-body">
+				<a class="btn btn-primary  btn-sm btn-block" href="{% url 'nuevo_cliente' %}">Nuevo Cliente</a>
+				<table class="table table-sm">
+					<tr>
+						<th></th>
+						<th>Nombre</th>
+						<th>Lista</th>
+					</tr>
+
+					
+					{% for cliente in clientes %}
+						<tr>
+							<td><a class="btn btn-sm btn-info" href="{% url 'cliente' cliente.id %}">View</a></td>
+							<td>{{cliente.nombre}}</td>
+							<td>{{cliente.lista_precios}}</td>
+						</tr>
+					{% endfor %}
+			
+
+				</table>
+			</div>
+		</div>
+
+		<div class="col-7">
+			<h5>BARRILES</h5>
+			<hr>
+			<div class="card card-body">
+				
+				<table class="table table-sm">
+					<tr>
+						<th>#</th>
+						<th>Estilo</th>
+						<th>Lote</th>
+						<th>Ubicación</th>
+						<th>Vol</th>
+					</tr>
+
+					{% for barril in barriles %}
+						<tr>
+							<td>{{barril.num_barril}}</td>
+							<td>{{barril.estilo}}</td>
+							<td>{{barril.lote}}</td>
+							<td>{{barril.ubicacion}}</td>						
+							<td>{{barril.volumen}}</td>
+							
+							
+							
+						</tr>
+					{% endfor %}
+		
+
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-4">
+			<h5>ESTILOS</h5>
+			<hr>
+			<div class="card card-body">
+				<a class="btn btn-primary  btn-sm btn-block" href="{% url 'nuevo_estilo' %}">Nuevo Estilo</a>
+				<table class="table table-sm">
+					<tr>
+						<th>Estilo</th>
+						<th>Precio 1</th>
+						<th>Precio 2</th>
+						<th>Precio 3</th>
+					
+					</tr>
+
+					{% for estilo in estilos %}
+						<tr>
+							<td>{{estilo.nombre_estilo}}</td>
+							<td>{{estilo.precio1}}</td>
+							<td>{{estilo.precio2}}</td>
+							<td>{{estilo.precio3}}</td>
+							
+							
+						</tr>
+					{% endfor %}
+		
+
+				</table>
+			</div>
+		</div>
+		<div class="col-4">
+			<h5>LOTES</h5>
+			<hr>
+			<div class="card card-body">
+				<a class="btn btn-primary  btn-sm btn-block" href="">Nuevo Lote</a>
+				<table class="table table-sm">
+					<tr>
+						<th>Lote</th>
+						<th>Estilo</th>
+						<th>Fecha</th>									
+					</tr>
+
+					{% for lote in lotes %}
+						<tr>
+							<td>{{lote.num_lote}}</td>
+							<td>{{lote.estilo}}</td>
+							<td>{{lote.fecha_lote}}</td>
+						</tr>
+					{% endfor %}
+		
+
+				</table>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+
