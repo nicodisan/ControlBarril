@@ -8,9 +8,11 @@ urlpatterns = [
     
     path('', views.home, name="home"),
     path('barriles/', views.barriles, name="barriles"),
-    path('cliente/<str:pk_test>/', views.cliente, name="cliente"),
-    #path('crear_barril/', views.crearBarril, name="crear_barril"),
+    path('cliente/<str:pk>/', views.cliente, name="cliente"),
     path('nuevo_cliente/', views.nuevoCliente, name="nuevo_cliente"),
     path('nuevo_estilo/', views.crearEstilo, name="nuevo_estilo"),
+    path('nuevo_barril/', views.crearBarril, name="nuevo_barril"),
+    path('nuevo_lote_barril/', views.crearLoteBarril, name="nuevo_lote_barril"),
+    path('embarrilado/<str:pk>/', views.embarrilarLote, name="embarrilado"),
 
 ]

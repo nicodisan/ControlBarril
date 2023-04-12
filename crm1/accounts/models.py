@@ -31,24 +31,24 @@ class Estilo(models.Model):
         return self.nombre_estilo
 
 
+class Lote(models.Model):
+
+    num_lote = models.CharField(max_length=20, null=True)
+    fecha_lote = models.DateField(null=True)
+    estilo = models.ForeignKey(Estilo, null=True, blank=True, on_delete= models.SET_NULL)
+  
+    def __str__(self):
+        return self.num_lote
 
 class Barril(models.Model):
-    CATEGORY = (
-        ('Golden', 'Golden'),
-        ('Honey', 'Honey'),
-        ('Irish Red', 'Irish Red'),
-        ('Ipa Argenta', 'Ipa Argenta'),
-        ('Caramel Ipa', 'Caramel Ipa'),
-    )
-
-
+   
     num_barril = models.CharField(max_length=20, null=True)
     precio = models.FloatField(null=True, blank=True)
-    estilo = models.CharField(max_length=30, null=True, choices=CATEGORY, blank=True)
-    lote = models.CharField(max_length=20, null=True, blank=True)
-    cliente = models.CharField(max_length=20, null=True, blank=True)
-    ubicacion = models.CharField(max_length=20, null=True, blank=True)
+    estilo = models.ForeignKey(Estilo, null=True, blank=True, on_delete= models.SET_NULL)
+    lote = models.ForeignKey(Lote, null=True, blank=True, on_delete= models.SET_NULL)
+    ubicacion = models.ForeignKey(Cliente, null=True, on_delete= models.SET_NULL)
     volumen = models.CharField(max_length=3, null=True)
+    estado_actual = models.ForeignKey("Embarrilado", related_name='barriles', null=True, blank=True, on_delete=models.SET_NULL)
     
    
 
@@ -59,21 +59,14 @@ class Barril(models.Model):
 
 class Embarrilado(models.Model):
 
-    ubicacion = models.CharField(max_length=20, default="Fabrica", null=True,)
+    lote = models.ForeignKey(Lote, null=True, blank=True, on_delete= models.SET_NULL)
+    ubicacion = models.ForeignKey(Cliente, null=True, on_delete= models.SET_NULL)
     num_barril = models.ForeignKey(Barril, null=True, on_delete= models.SET_NULL)
     date_created = models.DateField(null=True)
     
 
     def __str__(self):
-        return self.num_pedido
+        return str(self.lote)
 
 
 
-class Lote(models.Model):
-
-    num_lote = models.CharField(max_length=20, null=True)
-    fecha_lote = models.DateField(null=True)
-    estilo = models.ForeignKey(Estilo, null=True, blank=True, on_delete= models.SET_NULL)
-  
-    def __str__(self):
-        return self.num_lote

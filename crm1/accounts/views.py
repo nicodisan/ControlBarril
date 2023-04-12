@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 
 
 from .models import *
-from .forms import ClienteForm, EstiloForm, CreateUserForm
+from .forms import *
 from .filter import OrderFilter
 
 def registerPage(request):
@@ -59,8 +59,8 @@ def barriles(request):
 
     return render(request, 'accounts/barriles.html', {'barriles': barriles})
 
-def cliente(request, pk_test):
-    cliente = Cliente.objects.get(id=pk_test)
+def cliente(request, pk):
+    cliente = Cliente.objects.get(id=pk)
 
     context = {'cliente':cliente}
     return render(request, 'accounts/cliente.html', context)
@@ -105,3 +105,35 @@ def crearLote(request):
    
     context = {'form': form}
     return render(request, 'accounts/nuevo_lote.html', context)
+
+def crearBarril(request):
+
+    form = CrearBarrilForm()
+    if request.method == 'POST':       
+        form = CrearBarrilForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'accounts/nuevo_barril.html', context)
+
+
+def crearLoteBarril(request):
+    if request.method == 'POST':
+        form = RangoBarrilesForm(request.POST)
+        if form.is_valid():
+            desde = form.cleaned_data['desde']
+            hasta = form.cleaned_data['hasta']
+            volumen = form.cleaned_data['volumen']
+            for num_barril in range(desde, hasta + 1):
+                Barril.objects.create(num_barril=num_barril, volumen=volumen)
+            # Redirigir a una página de éxito
+    else:
+        form = RangoBarrilesForm()
+    return render(request, 'accounts/nuevo_lote_barril.html', {'form': form})
+
+
+def embarrilarLote(request, pk):
+
+
