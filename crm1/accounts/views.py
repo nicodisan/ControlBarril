@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
@@ -134,6 +134,20 @@ def crearLoteBarril(request):
     return render(request, 'accounts/nuevo_lote_barril.html', {'form': form})
 
 
-def embarrilarLote(request, pk):
+#def embarrilarLote(request, pk):
+
+def updateBarril(request):
+
+    form = UpdateBarrilForm()
+    if request.method == 'POST':
+        form = UpdateBarrilForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        
+    else:
+        form = UpdateBarrilForm()
+
+    return render(request, 'accounts/update_barril.html', {'form': form})
 
 

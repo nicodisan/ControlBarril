@@ -5,6 +5,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+
+
+
+
+
+
 class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
@@ -67,7 +73,7 @@ class RangoBarrilesForm(forms.Form):
 
 
 
-class EmbarrilarLoteForm(ModelForm):
+class UpdateBarrilForm(ModelForm):
     class Meta:
-        model = Embarrilado
-        fields = '__all__'
+        model = Barril
+        fields = ['estilo', 'lote', 'ubicacion', 'fecha']
