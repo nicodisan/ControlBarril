@@ -13,6 +13,6 @@ urlpatterns = [
     path('nuevo_estilo/', views.crearEstilo, name="nuevo_estilo"),
     path('nuevo_barril/', views.crearBarril, name="nuevo_barril"),
     path('nuevo_lote_barril/', views.crearLoteBarril, name="nuevo_lote_barril"),
-    path('update_barril/', views.updateBarril, name="update_barril"),
+    path('update_barril/<str:pk>/', views.updateBarril, name="update_barril"),
 
 ]

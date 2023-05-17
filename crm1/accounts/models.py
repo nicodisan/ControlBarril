@@ -10,7 +10,7 @@ class Cliente(models.Model):
         ('Precio2', 'Precio 2'),
         ('Precio3', 'Precio 3')
     )
-
+    
     nombre = models.CharField(max_length=200, null=True)
     telefono = models.CharField(max_length=20, null=True)
     vendedor = models.CharField(max_length=30, null=True)
@@ -42,7 +42,8 @@ class Lote(models.Model):
     
 class Barril(models.Model):
    
-    num_barril = models.CharField(primary_key=True, max_length=20, unique=True)
+   
+    num_barril = models.CharField(max_length=20, unique=True)
     precio = models.FloatField(null=True, blank=True)
     estilo = models.ForeignKey('Estilo', null=True, blank=True, on_delete= models.SET_NULL)
     lote = models.ForeignKey('Lote', null=True, blank=True, on_delete= models.SET_NULL)

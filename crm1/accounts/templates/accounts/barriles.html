@@ -5,10 +5,10 @@
     
 <br>
 
-<div class="row">
-    <div class="col-md">
+<div class="row justify-content-center">
+    <div class="col-8">
         <div class="card card-body">
-            <h5>Barriles</h5>
+            <h5>Toodos los Barriles</h5>
         </div>
         <div class="card card-body">
            
@@ -21,24 +21,30 @@
                     <th>Ubicacion</th>
                     <th>Volumen</th>
                     <th>Precio</th>
+                    <th></th>
 
                 </tr>
                 
                 {% for barril in barriles %}
                 
                     <tr>                   
-                        <td><input class="form-check-input" type="checkbox" value="{{barril.num_barril}}" id="flexCheckDefault">
-                        </div></td>
+                        <td>
+                            </div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="checks[]" value="{{barril.id}}">
+                            </div>
+                        </td>
                         <td>{{barril.num_barril}}</td>
                         <td>{{barril.estilo}}</td>
                         <td>{{barril.lote}}</td>
                         <td>{{barril.ubicacion}}</td>
                         <td>{{barril.volumen}}</td>
                         <td>{{barril.precio}}</td>
+                        <td><a class="btn btn-sm btn-info" type="submit" href="{% url 'update_barril' barril.id %}">Editar</a></td>
                     </tr>
                 {% endfor %}
             </table>
-            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'update_barril' %}">Modificar</a>
+            
+            <a class="btn btn-primary  btn-sm btn-block" type="submit" href="">Modificar</a>
         </div>
         
     </div>

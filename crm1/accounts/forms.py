@@ -6,11 +6,6 @@ from django.contrib.auth.models import User
 
 
 
-
-
-
-
-
 class ClienteForm(ModelForm):
     class Meta:
         model = Cliente
@@ -36,20 +31,9 @@ class LoteForm(ModelForm):
 class CrearBarrilForm(ModelForm):
     class Meta:
         model = Barril
-        fields = ['num_barril', 'volumen']
+        fields = ['num_barril', 'volumen', "ubicacion"]
+
         
-
-    def clean(self):
-        cleaned_data = super().clean()
-        num_barril = cleaned_data.get('num_barril')        
-        if Barril.objects.filter(num_barril=num_barril).exists():
-            raise forms.ValidationError('Ya existe un barril con esos valores.')
-
-
-class aaaRangoBarrilesForm(ModelForm):
-    class Meta:
-        model = Barril
-        fields = ['num_barril', 'volumen']
 
     def clean(self):
         cleaned_data = super().clean()
@@ -74,6 +58,9 @@ class RangoBarrilesForm(forms.Form):
 
 
 class UpdateBarrilForm(ModelForm):
+
+    
     class Meta:
         model = Barril
+       
         fields = ['estilo', 'lote', 'ubicacion', 'fecha']

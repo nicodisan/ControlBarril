@@ -134,12 +134,14 @@ def crearLoteBarril(request):
     return render(request, 'accounts/nuevo_lote_barril.html', {'form': form})
 
 
-#def embarrilarLote(request, pk):
 
-def updateBarril(request):
+def aaupdateBarril(request, pk):
 
+
+    barril = Barril.objects.get(id=pk)
+    
     form = UpdateBarrilForm()
-    if request.method == 'POST':
+    if request.method == 'POST':        
         form = UpdateBarrilForm(request.POST)
         if form.is_valid():
             form.save()
@@ -148,6 +150,21 @@ def updateBarril(request):
     else:
         form = UpdateBarrilForm()
 
-    return render(request, 'accounts/update_barril.html', {'form': form})
+    return render(request, 'accounts/update_barril.html', {'form': form}, {'barril': barril})
 
 
+
+
+
+
+
+def updateBarril(request, pk):
+
+    barril = Barril.objects.get(id=pk)
+    
+   
+    check = request.POST.getlist('checks[]')
+  
+    print(check)
+    context =  {}
+    return render(request, 'accounts/update_barril.html', context)
